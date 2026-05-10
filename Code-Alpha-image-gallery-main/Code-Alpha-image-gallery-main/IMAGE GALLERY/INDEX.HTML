@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Image Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Simple Image Gallery</h2>
+
+<!-- Filter Buttons -->
+<div class="buttons">
+  <button onclick="showAll()">All</button>
+  <button onclick="filterGallery('nature')">Nature</button>
+  <button onclick="filterGallery('city')">City</button>
+</div>
+
+<!-- Image Gallery Grid -->
+<div class="container">
+  <img src="https://picsum.photos/id/1015/300" class="box" data-type="nature" onclick="viewImage(this)">
+  <img src="https://picsum.photos/id/1021/300" class="box" data-type="city" onclick="viewImage(this)">
+  <img src="https://picsum.photos/id/1032/300" class="box" data-type="nature" onclick="viewImage(this)">
+  <img src="https://picsum.photos/id/1041/300" class="box" data-type="city" onclick="viewImage(this)">
+</div>
+
+<!-- Lightbox View -->
+<div id="popup" onclick="closePopup()">
+  <span class="close-btn">X</span>
+  <img id="popup-img" src="">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

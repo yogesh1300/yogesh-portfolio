@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h2 {
+    color: #2c3e50;
+  }
+  
+  .player {
+    background: white;
+    padding: 20px;
+    margin: 0 auto;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  }
+  
+  .song-info p {
+    margin: 5px;
+    font-weight: bold;
+  }
+  
+  .controls button {
+    font-size: 20px;
+    margin: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  #progress {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .time-info {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .volume-control {
+    margin-top: 15px;
+  }
