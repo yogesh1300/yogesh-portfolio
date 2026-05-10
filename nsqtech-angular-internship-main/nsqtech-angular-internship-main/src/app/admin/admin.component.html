@@ -1,0 +1,16 @@
+<h2>Admin Dashboard</h2>
+
+<div *ngIf="loading">Loading users...</div>
+
+<table *ngIf="!loading" border="1" cellpadding="10">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Role</th>
+  </tr>
+  <tr *ngFor="let u of users">
+    <td>{{u.id}}</td>
+    <td>{{u.name}}</td>
+    <td>{{u.role}}</td>
+  </tr>
+</table>

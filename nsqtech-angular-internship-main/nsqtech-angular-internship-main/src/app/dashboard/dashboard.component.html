@@ -1,0 +1,82 @@
+<app-topbar (logoutEvent)="onLogout()"></app-topbar>
+<div class="dashboard-container">
+  <div class="sidebar">
+    <h3>NSQTech Dashboard</h3>
+    <ul>
+      <li><a href="#" class="active">Dashboard Home</a></li>
+      <li><a href="#">My Records</a></li>
+      <li *ngIf="user?.role === 'Admin' || user?.role === 'SuperAdmin'"><a href="#">User Management</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="welcome-section">
+      <h2>Welcome back, {{ user?.username }}!</h2>
+      <div class="user-info">
+        <div class="user-avatar">
+          {{ user?.username?.charAt(0)?.toUpperCase() }}
+        </div>
+        <div class="user-details">
+          <h3>{{ user?.username }}</h3>
+          <p>{{ user?.role }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="records-section">
+      <h3>My Records</h3>
+      <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+      <table *ngIf="!isLoading" class="records-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of records">
+            <td>{{ record.id }}</td>
+            <td>{{ record.name }}</td>
+            <td><span class="status-badge">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="user?.role === 'Admin' || user?.role === 'SuperAdmin'" class="admin-section">
+      <h3>User Management
+        <small *ngIf="user?.role === 'SuperAdmin'" style="margin-left:10px;color:#9ca3af;font-weight:500">(Super Admin can delete users)</small>
+      </h3>
+      <div class="user-cards">
+        <div class="user-card" *ngFor="let u of users">
+          <div *ngIf="editingUserId !== u.id">
+            <h4>{{ u.username }}</h4>
+            <p><strong>Role:</strong> {{ u.role }}</p>
+            <p><strong>ID:</strong> {{ u.id }}</p>
+            <div class="user-actions">
+              <button class="btn btn-primary" (click)="startEdit(u)">Edit</button>
+              <!-- Delete only visible to SuperAdmin -->
+              <button *ngIf="user?.role === 'SuperAdmin'" class="btn btn-danger" (click)="deleteUser(u.id)">Delete</button>
+            </div>
+          </div>
+
+          <div *ngIf="editingUserId === u.id" class="edit-form">
+            <input [(ngModel)]="editedName" placeholder="Username" />
+            <select [(ngModel)]="editedRole">
+              <option value="General User">General User</option>
+              <option value="Admin">Admin</option>
+            </select>
+            <div class="user-actions">
+              <button class="btn btn-success" (click)="saveEdit(u)">Save</button>
+              <button class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

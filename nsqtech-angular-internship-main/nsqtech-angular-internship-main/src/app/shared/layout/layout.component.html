@@ -1,0 +1,12 @@
+<div style="display:flex">
+  <div style="width:200px;background:#111;color:#fff;padding:10px">
+    <h3>Dashboard</h3>
+    <a routerLink="/admin" style="color:white">Admin</a><br><br>
+    <a routerLink="/user" style="color:white">User</a><br><br>
+    <button (click)="logout()">Logout</button>
+  </div>
+
+  <div style="padding:20px;width:100%">
+    <router-outlet></router-outlet>
+  </div>
+</div>

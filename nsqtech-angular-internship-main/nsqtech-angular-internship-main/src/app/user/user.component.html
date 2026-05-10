@@ -1,0 +1,9 @@
+<h2>User Dashboard</h2>
+
+<div *ngIf="loading">Loading tasks...</div>
+
+<ul *ngIf="!loading">
+  <li *ngFor="let t of tasks">
+    {{t.task}}
+  </li>
+</ul>

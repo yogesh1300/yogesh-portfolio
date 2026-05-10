@@ -1,0 +1,722 @@
+================================================================================
+ZORVYN FINANCE SYSTEM BACKEND - SETUP AND USAGE GUIDE
+================================================================================
+
+PROJECT OVERVIEW
+----------------
+FastAPI-based finance backend with:
+- Transaction CRUD (Create, Read, Update, Delete)
+- Financial summaries and analytics
+- Role-based access control (viewer, analyst, admin)
+- JWT authentication
+- SQLite database
+- Full test suite
+
+SYSTEM REQUIREMENTS
+-------------------
+- Python 3.7+
+- Windows PowerShell or Command Prompt
+- Git (optional, for version control)
+
+================================================================================
+STEP 1: SETUP VIRTUAL ENVIRONMENT
+================================================================================
+
+Location: C:\Users\acer\OneDrive\Desktop\zirvoo
+
+1a. Open PowerShell and navigate to project:
+    cd C:\Users\acer\OneDrive\Desktop\zirvoo
+
+1b. Create virtual environment:
+    python -m venv venv
+
+    Output:
+    --------
+    (Creates folder: zirvoo/venv/)
+
+1c. Activate virtual environment:
+    .\venv\Scripts\Activate
+
+    Output:
+    --------
+    (venv) PS C:\Users\acer\OneDrive\Desktop\zirvoo>
+
+1d. Verify activation (should show venv Python path):
+    python -c "import sys; print(sys.executable)"
+
+    Output:
+    --------
+    C:\Users\acer\OneDrive\Desktop\zirvoo\venv\Scripts\python.exe
+
+================================================================================
+STEP 2: INSTALL DEPENDENCIES
+================================================================================
+
+2a. Upgrade pip:
+    python -m pip install --upgrade pip
+
+    Output:
+    --------
+    Successfully installed pip-X.Y.Z
+
+2b. Install requirements:
+    pip install -r requirements.txt
+
+    Output:
+    --------
+    Collecting fastapi
+    Downloading fastapi-X.X.X-py3-none-any.whl (X.X MB)
+    ...
+    Collecting uvicorn[standard]
+    ...
+    Collecting sqlalchemy
+    ...
+    Collecting pydantic
+    ...
+    Collecting python-jose[cryptography]
+    ...
+    Collecting passlib[bcrypt]
+    ...
+    Successfully installed ... (packages listed)
+
+2c. Verify installations:
+    pip list
+
+    Output:
+    --------
+    Package             Version
+    ------------------- ---------
+    bcrypt              4.X.X
+    cffi                1.X.X
+    click               8.X.X
+    cryptography        41.X.X
+    fastapi             0.X.X
+    passlib             1.X.X
+    pydantic            2.X.X
+    python-jose         3.X.X
+    sqlalchemy          2.X.X
+    uvicorn             0.X.X
+    ... (and more)
+
+================================================================================
+STEP 3: START THE FASTAPI SERVER
+================================================================================
+
+3a. Start server with auto-reload (development):
+    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+    Output:
+    --------
+    INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+    INFO:     Started server process [12345]
+    INFO:     Waiting for application startup.
+    INFO:     Application startup complete
+    INFO:     Started reloader process [12346] using StatReload
+
+    (The server is now running and listening on port 8000)
+
+3b. Keep this terminal open. Open a NEW PowerShell terminal for API testing.
+
+================================================================================
+STEP 4: VERIFY API IS RUNNING
+================================================================================
+
+4a. Open new PowerShell terminal and test health:
+    curl.exe http://127.0.0.1:8000/docs
+
+    Output:
+    --------
+    (Browser opens with Swagger UI showing all API endpoints)
+    OR
+    HTTP 200 status with HTML Swagger documentation
+
+4b. Verify database initialized:
+    ls app.db
+
+    Output:
+    --------
+    Mode                 LastWriteTime         Length Name
+    ----                 -------------         ------ ----
+    -a---           4/2/2026 10:00 AM       X,XXX app.db
+
+    (SQLite database file should exist and grow after operations)
+
+================================================================================
+STEP 5: LOGIN AND GET JWT TOKEN
+================================================================================
+
+Seed users (auto-created on startup):
+- admin / admin123
+- analyst / analyst123
+- viewer / viewer123
+
+5a. Login as admin and get token:
+    curl.exe -X POST "http://127.0.0.1:8000/token?username=admin&password=admin123"
+
+    Output:
+    --------
+    {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMzY1NzIwMH0.xyz...",
+      "token_type": "bearer"
+    }
+
+    (Save the access_token for next steps)
+
+5b. Login as analyst:
+    curl.exe -X POST "http://127.0.0.1:8000/token?username=analyst&password=analyst123"
+
+    Output:
+    --------
+    {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbmFseXN0IiwiZXhwIjoxNzEzNjU3MjAw...",
+      "token_type": "bearer"
+    }
+
+5c. Login as viewer:
+    curl.exe -X POST "http://127.0.0.1:8000/token?username=viewer&password=viewer123"
+
+    Output:
+    --------
+    {
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ2aWV3ZXIiLCJleHAiOjE3MTM2NTcy...",
+      "token_type": "bearer"
+    }
+
+================================================================================
+STEP 6: CREATE A TRANSACTION (ADMIN/ANALYST ONLY)
+================================================================================
+
+6a. Admin creates income transaction:
+    
+    curl.exe -X POST "http://127.0.0.1:8000/transactions" `
+         -H "Authorization: Bearer $token" `
+         -H "Content-Type: application/json" `
+         -d '{"amount":1200.5,"type":"income","category":"salary","date":"2026-04-01","notes":"April salary","owner_id":1}'
+
+    Output:
+    --------
+    {
+      "amount": 1200.5,
+      "type": "income",
+      "category": "salary",
+      "date": "2026-04-01",
+      "notes": "April salary",
+      "id": 1,
+      "owner_id": 1
+    }
+
+6b. Admin creates expense transaction:
+    
+    curl.exe -X POST "http://127.0.0.1:8000/transactions" `
+         -H "Authorization: Bearer $token" `
+         -H "Content-Type: application/json" `
+         -d '{"amount":50.0,"type":"expense","category":"food","date":"2026-04-02","notes":"Groceries","owner_id":1}'
+
+    Output:
+    --------
+    {
+      "amount": 50.0,
+      "type": "expense",
+      "category": "food",
+      "date": "2026-04-02",
+      "notes": "Groceries",
+      "id": 2,
+      "owner_id": 1
+    }
+
+================================================================================
+STEP 7: VIEW ALL TRANSACTIONS
+================================================================================
+
+7a. View all transactions:
+    curl.exe -H "Authorization: Bearer $token" `
+         http://127.0.0.1:8000/transactions
+
+    Output:
+    --------
+    [
+      {
+        "amount": 1200.5,
+        "type": "income",
+        "category": "salary",
+        "date": "2026-04-01",
+        "notes": "April salary",
+        "id": 1,
+        "owner_id": 1
+      },
+      {
+        "amount": 50.0,
+        "type": "expense",
+        "category": "food",
+        "date": "2026-04-02",
+        "notes": "Groceries",
+        "id": 2,
+        "owner_id": 1
+      }
+    ]
+
+7b. Filter by type (expenses only):
+    curl.exe -H "Authorization: Bearer $token" `
+         "http://127.0.0.1:8000/transactions?type=expense"
+
+    Output:
+    --------
+    [
+      {
+        "amount": 50.0,
+        "type": "expense",
+        "category": "food",
+        "date": "2026-04-02",
+        "notes": "Groceries",
+        "id": 2,
+        "owner_id": 1
+      }
+    ]
+
+7c. Filter by category:
+    curl.exe -H "Authorization: Bearer $token" `
+         "http://127.0.0.1:8000/transactions?category=salary"
+
+    Output:
+    --------
+    [
+      {
+        "amount": 1200.5,
+        "type": "income",
+        "category": "salary",
+        "date": "2026-04-01",
+        "notes": "April salary",
+        "id": 1,
+        "owner_id": 1
+      }
+    ]
+
+================================================================================
+STEP 8: GET TRANSACTION BY ID
+================================================================================
+
+8a. Get transaction with id=1:
+    curl.exe -H "Authorization: Bearer $token" `
+         http://127.0.0.1:8000/transactions/1
+
+    Output:
+    --------
+    {
+      "amount": 1200.5,
+      "type": "income",
+      "category": "salary",
+      "date": "2026-04-01",
+      "notes": "April salary",
+      "id": 1,
+      "owner_id": 1
+    }
+
+8b. Try to get non-existent transaction (id=999):
+    curl.exe -H "Authorization: Bearer $token" `
+         http://127.0.0.1:8000/transactions/999
+
+    Output:
+    --------
+    HTTP 404 Not Found
+    
+    {
+      "detail": "Transaction not found"
+    }
+
+================================================================================
+STEP 9: UPDATE A TRANSACTION
+================================================================================
+
+9a. Update transaction id=1 (change notes):
+    
+    curl.exe -X PUT "http://127.0.0.1:8000/transactions/1" `
+         -H "Authorization: Bearer $token" `
+         -H "Content-Type: application/json" `
+         -d '{"notes":"Updated: April salary (revised)"}'
+
+    Output:
+    --------
+    {
+      "amount": 1200.5,
+      "type": "income",
+      "category": "salary",
+      "date": "2026-04-01",
+      "notes": "Updated: April salary (revised)",
+      "id": 1,
+      "owner_id": 1
+    }
+
+================================================================================
+STEP 10: GET FINANCIAL SUMMARY
+================================================================================
+
+10a. Get summary for all transactions:
+     curl.exe -H "Authorization: Bearer $token" `
+          http://127.0.0.1:8000/summary
+
+     Output:
+     --------
+     {
+       "total_income": 1200.5,
+       "total_expense": 50.0,
+       "balance": 1150.5,
+       "category_breakdown": {
+         "salary": 1200.5,
+         "food": -50.0
+       },
+       "monthly_totals": {
+         "2026-04": {
+           "income": 1200.5,
+           "expense": 50.0
+         }
+       },
+       "recent_activity": [
+         {
+           "amount": 50.0,
+           "type": "expense",
+           "category": "food",
+           "date": "2026-04-02",
+           "notes": "Groceries",
+           "id": 2,
+           "owner_id": 1
+         },
+         {
+           "amount": 1200.5,
+           "type": "income",
+           "category": "salary",
+           "date": "2026-04-01",
+           "notes": "Updated: April salary (revised)",
+           "id": 1,
+           "owner_id": 1
+         }
+       ]
+     }
+
+10b. Get summary filtered by type (income only):
+     curl.exe -H "Authorization: Bearer $token" `
+          "http://127.0.0.1:8000/summary?type=income"
+
+     Output:
+     --------
+     {
+       "total_income": 1200.5,
+       "total_expense": 0.0,
+       "balance": 1200.5,
+       "category_breakdown": {
+         "salary": 1200.5
+       },
+       "monthly_totals": {
+         "2026-04": {
+           "income": 1200.5,
+           "expense": 0.0
+         }
+       },
+       "recent_activity": [
+         {
+           "amount": 1200.5,
+           "type": "income",
+           "category": "salary",
+           "date": "2026-04-01",
+           "notes": "Updated: April salary (revised)",
+           "id": 1,
+           "owner_id": 1
+         }
+       ]
+     }
+
+================================================================================
+STEP 11: DELETE A TRANSACTION (ADMIN ONLY)
+================================================================================
+
+11a. Admin deletes transaction id=2:
+     curl.exe -X DELETE "http://127.0.0.1:8000/transactions/2" `
+          -H "Authorization: Bearer $token"
+
+     Output:
+     --------
+     HTTP 204 No Content
+     (Empty response, indicating successful deletion)
+
+11b. Verify deletion by fetching id=2:
+     curl.exe -H "Authorization: Bearer $token" `
+          http://127.0.0.1:8000/transactions/2
+
+     Output:
+     --------
+     HTTP 404 Not Found
+     
+     {
+       "detail": "Transaction not found"
+     }
+
+================================================================================
+STEP 12: TEST ROLE-BASED ACCESS CONTROL
+================================================================================
+
+12a. Viewer token tries to CREATE transaction (should fail):
+     
+     curl.exe -X POST "http://127.0.0.1:8000/transactions" `
+          -H "Authorization: Bearer $viewer_token" `
+          -H "Content-Type: application/json" `
+          -d '{"amount":100,"type":"expense","category":"test","date":"2026-04-02","notes":"Test","owner_id":1}'
+
+     Output:
+     --------
+     HTTP 403 Forbidden
+     
+     {
+       "detail": "Operation not permitted for role 'viewer'. required: ['admin', 'analyst']"
+     }
+
+12b. Viewer CAN view transactions:
+     curl.exe -H "Authorization: Bearer $viewer_token" `
+          http://127.0.0.1:8000/transactions
+
+     Output:
+     --------
+     [
+       {
+         "amount": 1200.5,
+         "type": "income",
+         "category": "salary",
+         "date": "2026-04-01",
+         "notes": "Updated: April salary (revised)",
+         "id": 1,
+         "owner_id": 1
+       }
+     ]
+
+12c. Analyst CAN create but CANNOT delete:
+     
+     curl.exe -X DELETE "http://127.0.0.1:8000/transactions/1" `
+          -H "Authorization: Bearer $analyst_token"
+
+     Output:
+     --------
+     HTTP 403 Forbidden
+     
+     {
+       "detail": "Operation not permitted for role 'analyst'. required: ['admin']"
+     }
+
+================================================================================
+STEP 13: RUN AUTOMATED TESTS
+================================================================================
+
+13a. Install test dependencies (if not already installed):
+     pip install pytest
+
+     Output:
+     --------
+     Collecting pytest
+     Downloading pytest-X.X.X-py3-none-any.whl (X.X MB)
+     ...
+     Successfully installed pytest-X.X.X
+
+13b. Run test suite:
+     pytest app/test_main.py -v
+
+     Output:
+     --------
+     =============================== test session starts ================================
+     platform win32 -- Python X.X.X, pytest-X.X.X, pluggy-X.X.X
+     rootdir: C:\Users\acer\OneDrive\Desktop\zirvoo
+     collected 4 items
+     
+     app/test_main.py::test_health_and_docs PASSED                           [ 25%]
+     app/test_main.py::test_token_login_and_roles PASSED                     [ 50%]
+     app/test_main.py::test_crud_transactions_admin PASSED                   [ 75%]
+     app/test_main.py::test_summary_calculation PASSED                       [100%]
+     
+     ================================ 4 passed in 1.23s ==================================
+
+13c. Run tests with coverage:
+     pip install pytest-cov
+
+     Output:
+     --------
+     Collecting pytest-cov
+     ...
+     Successfully installed pytest-cov-X.X.X
+
+     pytest app/test_main.py --cov=app --cov-report=term-missing
+
+     Output:
+     --------
+     ============================== test session starts ================================
+     platform win32 -- Python X.X.X, pytest-X.X.X, pluggy-X.X.X
+     rootdir: C:\Users\acer\OneDrive\Desktop\zirvoo
+     collected 4 items
+     
+     app/test_main.py::test_health_and_docs PASSED                           [ 25%]
+     app/test_main.py::test_token_login_and_roles PASSED                     [ 50%]
+     app/test_main.py::test_crud_transactions_admin PASSED                   [ 75%]
+     app/test_main.py::test_summary_calculation PASSED                       [100%]
+     
+     ======================== 4 passed in 1.45s ========================
+     Name                Stmts   Miss  Cover   Missing
+     ----                -----   ----  -----   ---------
+     app/__init__.py        0      0   100%
+     app/crud.py           85     12    86%
+     app/database.py        7      0   100%
+     app/dependencies.py   35      5    86%
+     app/main.py          55      8    85%
+     app/models.py        15      0   100%
+     app/schemas.py       30      0   100%
+     app/security.py      45     12    73%
+     ----                -----   ----  -----   ---------
+     TOTAL                272     37    86%
+
+================================================================================
+STEP 14: ACCESS SWAGGER & REDOC DOCUMENTATION
+================================================================================
+
+14a. Swagger UI (interactive):
+     Open browser: http://127.0.0.1:8000/docs
+
+     Shows:
+     - All API endpoints
+     - Request/response schemas
+     - Try-it-out button for live testing
+     - Authorization field to enter token
+
+14b. ReDoc (API reference):
+     Open browser: http://127.0.0.1:8000/redoc
+
+     Shows:
+     - Organized API reference
+     - All models and schemas
+     - Request examples
+
+14c. OpenAPI schema (JSON):
+     curl.exe http://127.0.0.1:8000/openapi.json
+
+     Output:
+     --------
+     {
+       "openapi": "3.0.2",
+       "info": {
+         "title": "Zorvyn Finance System Backend",
+         "description": "A FastAPI backend for personal finance tracking with role-based access control.",
+         "version": "1.0.0"
+       },
+       "paths": {
+         "/token": {...},
+         "/users": {...},
+         "/transactions": {...},
+         "/transactions/{transaction_id}": {...},
+         "/summary": {...}
+       },
+       "components": {
+         "schemas": {...}
+       }
+     }
+
+================================================================================
+STEP 15: STOP THE SERVER
+================================================================================
+
+15a. Go to terminal where server is running and press:
+     CTRL+C
+
+     Output:
+     --------
+     INFO:     Shutting down
+     INFO:     Shutdown complete
+
+15b. Deactivate virtual environment (optional):
+     deactivate
+
+     Output:
+     --------
+     PS C:\Users\acer\OneDrive\Desktop\zirvoo>
+
+================================================================================
+COMMON TROUBLESHOOTING
+================================================================================
+
+Issue: "ModuleNotFoundError: No module named 'fastapi'"
+Solution: Activate venv and run: pip install -r requirements.txt
+
+Issue: "Address already in use" on port 8000
+Solution: Use different port:
+         uvicorn app.main:app --reload --port 8001
+
+Issue: "SQLite database locked"
+Solution: Close any other terminal sessions using the same database
+
+Issue: "Authorization header invalid"
+Solution: Make sure token format is correct:
+         Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+         (Don't forget "Bearer " prefix)
+
+Issue: "Incorrect username or password"
+Solution: Seed users are:
+         admin / admin123
+         analyst / analyst123
+         viewer / viewer123
+
+================================================================================
+API ENDPOINT REFERENCE
+================================================================================
+
+Authentication:
+  POST   /token                        - Login and get JWT token
+
+Users (admin only):
+  POST   /users                        - Create new user
+  GET    /users                        - List all users
+
+Transactions:
+  POST   /transactions                 - Create transaction (admin/analyst)
+  GET    /transactions                 - List transactions (with filters)
+  GET    /transactions/{id}            - Get single transaction
+  PUT    /transactions/{id}            - Update transaction (admin/analyst)
+  DELETE /transactions/{id}            - Delete transaction (admin)
+
+Analytics:
+  GET    /summary                      - Get financial summary (with filters)
+
+Documentation:
+  GET    /docs                         - Swagger UI
+  GET    /redoc                        - ReDoc
+  GET    /openapi.json                 - OpenAPI schema
+
+================================================================================
+PROJECT FILES STRUCTURE
+================================================================================
+
+zirvoo/
+├── app/
+│   ├── __init__.py              - Package init
+│   ├── main.py                  - FastAPI app & routes
+│   ├── database.py              - SQLite setup
+│   ├── models.py                - SQLAlchemy models (User, Transaction)
+│   ├── schemas.py               - Pydantic request/response schemas
+│   ├── crud.py                  - Database operations
+│   ├── dependencies.py          - Authorization guards
+│   ├── security.py              - JWT & password hashing
+│   ├── test_main.py             - Unit tests
+│   └── app.db                   - SQLite database (auto-created)
+├── venv/                        - Virtual environment
+├── requirements.txt             - Python dependencies
+├── README.md                    - Project documentation
+└── SETUP_GUIDE.txt              - This file
+
+================================================================================
+DEPLOYMENT NOTES
+================================================================================
+
+For production use:
+1. Change SECRET_KEY in app/security.py
+2. Use environment variables for config
+3. Set CORS properly if frontend is separate
+4. Use PostgreSQL instead of SQLite
+5. Deploy with: uvicorn app.main:app --host 0.0.0.0 --port 8000
+6. Use reverse proxy (nginx) in front
+7. Enable HTTPS/SSL
+8. Set DEBUG=False in production
+
+================================================================================
+END OF SETUP GUIDE
+================================================================================

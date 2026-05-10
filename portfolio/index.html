@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yogesh M | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#home">Yogesh M</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero section" id="home">
+        <div class="hero-copy">
+          <span class="eyebrow">Hi, I’m</span>
+          <h1>Yogesh M</h1>
+          <p class="lead">Software Engineer & AI Developer Fresher | Python, Rasa AI, FastAPI, Angular, JavaScript, and web development.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work</a>
+            <a class="btn btn-secondary" href="resume.pdf" download>Download Resume</a>
+          </div>
+          <div class="social-row">
+            <a href="https://github.com/yogesh1300" aria-label="GitHub">GitHub</a>
+            <a href="https://linkedin.com/in/yogesh-m-bbbaba275" aria-label="LinkedIn">LinkedIn</a>
+            <a href="mailto:myogesh7890@gmail.com" aria-label="Email">Email</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-ring">
+            <div class="hero-ring-glow"></div>
+            <img src="profile.jpg" alt="Yogesh M" class="profile-image" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects-intro" id="projects">
+        <div class="section-heading">
+          <p class="section-label">My Projects</p>
+          <h2>Things I’ve Built</h2>
+          <p>Professional-grade work with AI, IoT, backend systems, web apps, and data science.</p>
+        </div>
+      </section>
+
+      <section class="project-grid section">
+        <article class="project-card featured-card">
+          <div class="project-media project-media-1">
+            <div class="project-media-label">
+              <span>Web Application</span>
+              <h4>Luxury Motorbike Portal</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Luxury Motorbike Purchase Portal</h3>
+            <p>Full-stack web application built with HTML, CSS, JavaScript, and SQL to showcase luxury bikes with booking and database storage.</p>
+            <div class="tech-badges"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQL</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/motorbike-portal.png" data-title="Luxury Motorbike Purchase Portal" data-description="Full-stack web application showcasing luxury bikes with booking and database storage." data-demo="https://yogesh1300.github.io/luxury-motorbike-portal" data-github="https://github.com/yogesh1300/luxury-motorbike-portal">Screenshot</button><a href="https://yogesh1300.github.io/luxury-motorbike-portal" class="small-btn" target="_blank">Live Demo</a><a href="https://github.com/yogesh1300/luxury-motorbike-portal" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-2">
+            <div class="project-media-label">
+              <span>AI Chatbot</span>
+              <h4>Smart AI Information Bot</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>AI Information Chatbot</h3>
+            <p>Rasa-based NLP chatbot designed for intent recognition and automated keyword-driven responses using web data sources.</p>
+            <div class="tech-badges"><span>Python</span><span>Rasa AI</span><span>ChatGPT</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/ai-bot.png" data-title="AI Information Chatbot" data-description="Rasa-based NLP chatbot for intent recognition and automated keyword-driven responses." data-demo="https://smart-ai-bot-1.onrender.com?utm_source=chatgpt.com" data-github="https://github.com/yogesh1300/ai-information-chatbot">Screenshot</button><a href="https://smart-ai-bot-1.onrender.com?utm_source=chatgpt.com" class="small-btn" target="_blank">Live Demo</a><a href="https://github.com/yogesh1300/ai-information-chatbot" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-4">
+            <div class="project-media-label">
+              <span>Backend API</span>
+              <h4>Zorvyn Finance System</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Zorvyn Finance Backend</h3>
+            <p>FastAPI backend for financial tracking, transaction CRUD, role-based access control, and summary dashboards using SQLite.</p>
+            <div class="tech-badges"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>Backend</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/finance-system.png" data-title="Zorvyn Finance Backend" data-description="FastAPI backend with transaction CRUD, role-based access control, and SQLite database." data-demo="#" data-github="#">Screenshot</button><a href="#" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-3">
+            <div class="project-media-label">
+              <span>IoT Assistive Device</span>
+              <h4>Virtual Eye Obstacle System</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Virtual Eye Obstacle System</h3>
+            <p>IoT assistive device built with Arduino and ultrasonic sensors to detect obstacles and notify visually impaired users.</p>
+            <div class="tech-badges"><span>Arduino</span><span>IoT</span><span>Embedded</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/virtual-eye.png" data-title="Virtual Eye Obstacle System" data-description="IoT assistive device with Arduino and ultrasonic sensors for obstacle detection." data-demo="https://github.com/yogesh1300/virtual-eye-obstacle-detection#demo" data-github="https://github.com/yogesh1300/virtual-eye-obstacle-detection">Screenshot</button><a href="https://github.com/yogesh1300/virtual-eye-obstacle-detection#demo" class="small-btn" target="_blank">Live Demo</a><a href="https://github.com/yogesh1300/virtual-eye-obstacle-detection" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-5">
+            <div class="project-media-label">
+              <span>Web UI Gallery</span>
+              <h4>Interactive Image Gallery</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Interactive Image Gallery</h3>
+            <p>Responsive gallery with category filters and lightbox preview built using HTML, CSS, and vanilla JavaScript.</p>
+            <div class="tech-badges"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/image-gallery.png" data-title="Interactive Image Gallery" data-description="Responsive gallery with category filters and lightbox preview using vanilla JavaScript." data-demo="#" data-github="#">Screenshot</button><a href="#" class="small-btn transparent" target="_blank">Live Demo</a><a href="#" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-6">
+            <div class="project-media-label">
+              <span>Angular Admin App</span>
+              <h4>Role-Based Login System</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Role-Based Admin Portal</h3>
+            <p>Angular SPA with Super Admin / Sub Admin permissions, role-based dashboard access, and fake backend session handling.</p>
+            <div class="tech-badges"><span>Angular</span><span>TypeScript</span><span>HTML</span><span>CSS</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/angular-admin.png" data-title="Role-Based Admin Portal" data-description="Angular SPA with Super Admin/Sub Admin permissions and role-based dashboard access." data-demo="#" data-github="#">Screenshot</button><a href="#" class="small-btn transparent" target="_blank">Live Demo</a><a href="#" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-media project-media-7">
+            <div class="project-media-label">
+              <span>Data Science</span>
+              <h4>Codsoft Internship Work</h4>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Codsoft Data Science Internship</h3>
+            <p>Collection of Python notebooks for classification, fraud detection, sales forecasting, and data analysis completed during the internship.</p>
+            <div class="tech-badges"><span>Python</span><span>Machine Learning</span><span>Pandas</span><span>Data Analysis</span></div>
+            <div class="card-actions"><button type="button" class="small-btn screenshot-btn" data-screenshot="screenshots/codsoft-data.png" data-title="Codsoft Data Science Internship" data-description="Python notebooks for classification, fraud detection, sales forecasting, and data analysis." data-demo="#" data-github="#">Screenshot</button><a href="#" class="small-btn transparent" target="_blank">Live Demo</a><a href="#" class="small-btn transparent" target="_blank">GitHub</a></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section about-grid" id="about">
+        <div class="about-copy">
+          <p class="section-label">About Me</p>
+          <h2>Aspiring AI Developer and Software Engineer.</h2>
+          <p>Familiar with AI-assisted workflows using ChatGPT, Gemini, and automation concepts. Strong problem-solving, debugging, and analytical skills with hands-on experience in chatbot development, backend APIs, Angular role-based systems, IoT solutions, and data science notebooks.</p>
+          <ul>
+            <li>College: Kings Engineering College (B.E. Electronics and Communication Engineering)</li>
+            <li>Interests: AI, Rasa, Web Development, IoT, Data Science</li>
+            <li>Strengths: Debugging, root cause analysis, documentation, collaboration</li>
+          </ul>
+          <a class="btn btn-primary" href="resume.pdf" download>Download Resume</a>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card"><span>7</span><p>Key Projects</p></div>
+          <div class="stat-card"><span>10</span><p>Core Technologies</p></div>
+          <div class="stat-card"><span>3</span><p>Internships Completed</p></div>
+        </div>
+      </section>
+
+      <section class="section skills-section" id="skills">
+        <div class="section-heading">
+          <p class="section-label">My Skills</p>
+          <h2>Technologies I Know</h2>
+        </div>
+        <div class="skills-categories">
+          <article class="skill-group">
+            <h3>Programming Languages</h3>
+            <div class="skill-tags"><span>Python</span><span>Java (Basics)</span></div>
+          </article>
+          <article class="skill-group">
+            <h3>Web & AI Tools</h3>
+            <div class="skill-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Angular</span><span>Rasa AI</span><span>ChatGPT</span><span>Gemini</span><span>NLP Basics</span></div>
+          </article>
+          <article class="skill-group">
+            <h3>Data & Development Tools</h3>
+            <div class="skill-tags"><span>SQL</span><span>FastAPI</span><span>Power BI Basics</span><span>Data Preprocessing</span><span>Data Visualization</span><span>Git & GitHub</span><span>VS Code</span><span>Google Colab</span><span>IntelliJ IDEA</span><span>Node.js (Basic)</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section info-section" id="education">
+        <div class="section-heading">
+          <p class="section-label">Education</p>
+          <h2>Academic Background</h2>
+        </div>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Kings Engineering College</h3>
+            <p>B.E. Electronics and Communication Engineering</p>
+            <p>CGPA: 8.0</p>
+            <p>2022 - 2026 | Sriperumputhur, Chennai</p>
+          </article>
+          <article class="info-card">
+            <h3>Don Bosco Matriculation School</h3>
+            <p>Higher Secondary (HSC)</p>
+            <p>Percentage: 83%</p>
+            <p>Chennai, India</p>
+          </article>
+          <article class="info-card">
+            <h3>Vivekananda Vidyalaya Senior College</h3>
+            <p>SSLC</p>
+            <p>Percentage: 72%</p>
+            <p>Chennai, India</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section experience-section" id="experience">
+        <div class="section-heading">
+          <p class="section-label">Experience</p>
+          <h2>Internships & Certificates</h2>
+        </div>
+        <div class="experience-grid">
+          <article class="experience-card">
+            <span class="experience-label">Virtual Internship</span>
+            <h3>CodeAlpha</h3>
+            <p>Front-End Development</p>
+            <ul>
+              <li>Built responsive web pages using HTML, CSS, and JavaScript.</li>
+              <li>Improved layout structure and user flow for better interaction.</li>
+              <li>Corrected UI issues and enhanced page responsiveness.</li>
+            </ul>
+          </article>
+          <article class="experience-card">
+            <span class="experience-label">Virtual Internship</span>
+            <h3>CodSoft</h3>
+            <p>Data Science</p>
+            <ul>
+              <li>Worked with datasets to clean and prepare data for analysis.</li>
+              <li>Built prediction models and validated outputs for accuracy.</li>
+              <li>Documented results and maintained clear project records.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="certificates-block">
+          <h3>Certifications</h3>
+          <ul class="certificates-list">
+            <li>Front-End Development Journey — Infosys Springboard</li>
+            <li>JavaScript Bootcamp — LetsUpgrade</li>
+            <li>Power BI Bootcamp for Real-Time Data Analysis — NoviTech</li>
+            <li>Internet of Things (IoT) MasterClass — NoviTech</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="section-heading">
+          <p class="section-label">Contact</p>
+          <h2>Let’s build something great together.</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card"><h3>Email</h3><p>myogesh7890@gmail.com</p></div>
+          <div class="contact-card"><h3>Phone</h3><p>7200163689</p></div>
+          <div class="contact-card"><h3>Location</h3><p>Chennai, India</p></div>
+        </div>
+        <a class="btn btn-secondary" href="mailto:myogesh7890@gmail.com">Send Message</a>
+      </section>
+    </main>
+
+    <div class="screenshot-modal" id="screenshotModal" aria-hidden="true">
+      <div class=\"modal-overlay\" id=\"modalOverlay\"></div>
+      <div class=\"modal-content\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"modalTitle\">
+        <button class=\"modal-close\" id=\"modalClose\" aria-label=\"Close screenshot viewer\">×</button>
+        
+        <div class=\"modal-container\">
+          <div class=\"modal-image-wrapper\">
+            <img id=\"modalImage\" src=\"\" alt=\"Project screenshot preview\" />
+            <button class=\"modal-nav modal-prev\" id=\"modalPrev\" aria-label=\"Previous screenshot\">‹</button>
+            <button class=\"modal-nav modal-next\" id=\"modalNext\" aria-label=\"Next screenshot\">›</button>
+          </div>
+          
+          <div class=\"modal-details\">
+            <div class=\"modal-header\">
+              <h3 id=\"modalTitle\">Project Screenshot</h3>
+              <p class=\"modal-label\">Live Preview</p>
+            </div>
+            <p id=\"modalCaption\" class=\"modal-description\">Project screenshot preview</p>
+            <div class=\"modal-actions\">
+              <a id=\"modalViewLive\" href=\"#\" class=\"action-link\" target=\"_blank\">View Live Demo</a>
+              <a id=\"modalViewGithub\" href=\"#\" class=\"action-link\" target=\"_blank\">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">© 2026 Yogesh M. All rights reserved.</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
