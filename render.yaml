@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: yogesh-portfolio
+    env: python
+    buildCommand: echo "Static site - no build needed"
+    startCommand: python -m http.server 8000
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
